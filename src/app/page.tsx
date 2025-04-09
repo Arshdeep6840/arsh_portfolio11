@@ -3,41 +3,40 @@
 import React, { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Github, Linkedin, Mail, Sun, Moon } from "lucide-react";
+import { Github, Linkedin, Mail, Sun, Moon, Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
 
 export default function Portfolio() {
   const [darkMode, setDarkMode] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", darkMode);
-  }, 
-  [darkMode]);
+  }, [darkMode]);
 
   return (
     <main className={`min-h-screen transition-colors duration-700 ${darkMode ? "bg-gradient-to-br from-black to-blue-950 text-white" : "bg-[radial-gradient(circle_at_top_left,white,rgb(140,226,255))] text-gray-900"} px-6 pb-10 pt-24`}>
 
       {/* Navbar */}
-      <nav className="fixed top-0 left-0 w-full z-50 h-20 px-6 py-0 bg-white/10 dark:bg-black/10 backdrop-blur-md border-b border-white/10 dark:border-white/10 flex justify-between items-center shadow-sm">
-        <div className="h-full flex items-center justify-start">
-          <div className="relative w-[290px] h-[150px]">
-            <a href="#hero">
-              <Image
-                src={darkMode ? "/703d1cbe-6398-4dfb-91eb-ec47250e9f7d.png" : "/dark-logo.png"}
-                alt="Logo"
-                fill
-                className="object-contain"
-                priority
-                sizes="100vw"
-              />
-            </a>
-          </div>
+      <nav className="fixed top-0 left-0 w-full z-50 h-20 px-4 md:px-6 bg-white/10 dark:bg-black/10 backdrop-blur-md border-b border-white/10 dark:border-white/10 flex justify-between items-center shadow-sm">
+        {/* Logo */}
+        <div className="h-full flex items-center">
+          <a href="#hero" className="relative w-36 md:w-[290px] h-12 md:h-[150px]">
+            <Image
+              src={darkMode ? "/703d1cbe-6398-4dfb-91eb-ec47250e9f7d.png" : "/dark-logo.png"}
+              alt="Logo"
+              fill
+              className="object-contain"
+              priority
+              sizes="100vw"
+            />
+          </a>
         </div>
 
-
-        <div className="flex items-center gap-6">
+        {/* Desktop Nav */}
+        <div className="hidden md:flex items-center gap-6">
           {['about', 'education', 'projects', 'contact'].map((section) => (
             <a key={section} href={`#${section}`} className="hover:underline text-sm font-medium capitalize">{section}</a>
           ))}
@@ -46,6 +45,35 @@ export default function Portfolio() {
             {darkMode ? "Light" : "Dark"}
           </Button>
         </div>
+
+        {/* Mobile Menu Button */}
+        <div className="md:hidden">
+          <Button variant="ghost" onClick={() => setMenuOpen(!menuOpen)}>
+            {menuOpen ? <X size={20} /> : <Menu size={20} />}
+          </Button>
+        </div>
+
+        {/* Mobile Menu */}
+        {menuOpen && (
+          <div className="absolute top-20 left-0 w-full bg-white/90 dark:bg-black/90 backdrop-blur-lg flex flex-col items-start p-6 gap-4 md:hidden shadow-md transition-all duration-300 ease-in-out">
+            {['about', 'education', 'projects', 'contact'].map((section) => (
+              <a key={section} href={`#${section}`} onClick={() => setMenuOpen(false)} className="text-base font-medium capitalize hover:underline">
+                {section}
+              </a>
+            ))}
+            <Button
+              variant="ghost"
+              onClick={() => {
+                setDarkMode(!darkMode);
+                setMenuOpen(false);
+              }}
+              className="flex items-center gap-2"
+            >
+              {darkMode ? <Sun size={18} /> : <Moon size={18} />}
+              {darkMode ? "Light" : "Dark"}
+            </Button>
+          </div>
+        )}
       </nav>
 
       {/* Hero Section */}
@@ -284,7 +312,7 @@ export default function Portfolio() {
         </h2>
         <p className="mb-5 opacity-80">Have a question or want to collaborate? Drop me a message.</p>
         <Button variant="secondary" className="px-6 py-2 text-base font-medium bg-white text-blue-900 hover:bg-blue-100" asChild>
-          <a href="mailto:arshdeepsingh17092@gmail.com">Send Email</a>
+          <a href="mailto:arshdeep17092@gmail.com">Send Email</a>
         </Button>
       </motion.section>
 

@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind screens;
+@tailwind typography;
+@tailwind forms;
+@tailwind aspect-ratio;
+@tailwind line-clamp;
+@tailwind container;
+@tailwind animate;
+@tailwind scrollbar;
+@tailwind dark;
+@tailwind dark-scrollbar;
+@tailwind dark-scrollbar-thumb;
+@tailwind dark-scrollbar-track;     

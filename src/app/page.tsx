@@ -312,7 +312,7 @@ export default function Portfolio() {
         </h2>
         <p className="mb-5 opacity-80">Have a question or want to collaborate? Drop me a message.</p>
         <Button variant="secondary" className="px-6 py-2 text-base font-medium bg-white text-blue-900 hover:bg-blue-100" asChild>
-          <a href="mailto:arshdeep17092@gmail.com">Send Email</a>
+          <a href="mailto:arshdeepsingh17092@gmail.com">Send Email</a>
         </Button>
       </motion.section>
 
